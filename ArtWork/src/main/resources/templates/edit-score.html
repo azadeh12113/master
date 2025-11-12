@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Edit Score</title></head>
+<body>
+
+<h1 th:if="${artist != null}">Edit Score for [[${artist.name}]]</h1>
+<h1 th:if="${artist == null}">Edit Score</h1>
+
+<form name="artist_form" th:action="@{/artists/edit/{id}(id=${artist != null ? artist.id : 0})}" method="post">
+    <label>New Score:</label>
+    <input type="number" name="score" th:value="${artist != null ? artist.score : 1}" min="1" max="3" required />
+    <button type="submit" name="btn_submit">Update</button>
+</form>
+
+<div th:if="${artist == null}">
+    <p th:text="${message}">No artist found</p>
+</div>
+
+<a href="/artists">Back to List</a>
+</body>
+</html>

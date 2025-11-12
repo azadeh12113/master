@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Artists</title>
+</head>
+<body>
+
+	<h1>Artists</h1>
+
+	<div th:if="${message != ''}">
+		<p th:text="${message}"></p>
+	</div>
+
+	<a href="/artists/new">Add New Artist</a>
+
+	<table id="artist_table" border="1">
+		<tr>
+			<th>Artists</th>
+			<th>Name</th>
+			<th>Art</th>
+			<th>Score</th>
+			<th>Judge</th>
+			<th>Actions</th>
+		</tr>
+		<tr th:each="artist : ${artists}">
+			<td></td>
+			<td th:text="${artist.name}">Name</td>
+			<td th:text="${artist.artName}">Art Name</td>
+			<td th:text="${artist.score}">Score</td>
+			<td
+				th:text="${artist.judge != null ? artist.judge.name : 'No judge'}">Judge</td>
+			<td>
+			 <a th:href="@{'artists/edit/' + ${artist.id}}">Edit</a> |
+			 <a	th:href="@{'artists/delete/' + ${artist.id}}">Delete</a>
+			</td>
+		</tr>
+	</table>
+
+</body>
+</html>

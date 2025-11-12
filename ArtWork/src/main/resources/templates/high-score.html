@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>High Score Artists</title>
+</head>
+<body>
+
+<h1>Artists With High Scores</h1>
+
+<table id= "highest_Score_table" border="1">
+    <tr>
+        <th>Name</th>
+        <th>Art Name</th>
+        <th>Score</th>
+    </tr>
+    <tr th:each="artist : ${artists}">
+        <td th:text="${artist.name}">Name</td>
+        <td th:text="${artist.artName}">Art Name</td>
+        <td th:text="${artist.score}">Score</td>
+    </tr>
+</table>
+
+<a href="/artists">Back to All Artists</a>
+
+</body>
+</html>

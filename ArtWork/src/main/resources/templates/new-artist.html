@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>New Artist</title>
+</head>
+<body>
+
+	<h1>Add New Artist</h1>
+
+	<form action="#" th:action="@{/artists}" method="post" th:object="${artist}">
+		<p>
+			Name: <input type="text" th:field="*{name}" />
+		</p>
+		<p>
+			Art Name: <input type="text" th:field="*{artName}" />
+		</p>
+		<p>
+			Score: <input type="number" th:field="*{score}" min="1" max="3" />
+		</p>
+		<button name="btn_submit" type="submit">Save</button>
+	</form>
+
+	<a href="/artists">Back to List</a>
+
+</body>
+</html>

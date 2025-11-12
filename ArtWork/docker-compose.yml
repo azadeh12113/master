@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0.36
+    environment:
+      MYSQL_ROOT_PASSWORD: 12113
+      MYSQL_DATABASE: artworkdb
+      MYSQL_USER: artworkdb
+      MYSQL_PASSWORD: 12113
+    # publish only if you truly need host access; otherwise omit to avoid conflicts
+    # ports:
+    #   - "13306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p12113"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - backend
+
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/artworkdb?useSSL=false&allowPublicKeyRetrieval=true
+      DB_USERNAME: artworkdb
+      DB_PASSWORD: 12113
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
